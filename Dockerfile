@@ -1,11 +1,16 @@
-FROM golang:1.18 AS builder
+FROM alpine:latest
 
-RUN mkdir /app
-ADD . /app
-WORKDIR /app
+ARG PB_VERSION=0.12.3
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o my_app main.go
+RUN apk add --no-cache \
+    unzip \
+    ca-certificates
 
-FROM alpine:latest AS production
-COPY --from=builder /app .
-CMD ["/my_app", "serve", "--http", "0.0.0.0:5000",  "--dir=/pb_data"]
+# download and unzip PocketBase
+ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
+RUN unzip /tmp/pb.zip -d /pb/
+
+EXPOSE 8080
+
+# start PocketBase
+CMD ["/pb/pocketbase", "serve", "--http", "0.0.0.0:5000",  "--dir=/pb_data"]
