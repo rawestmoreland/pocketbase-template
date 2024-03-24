@@ -11,6 +11,8 @@
 7. Push to your dokku `git push dokku main`
 8. Done
 
+[Dokku docs](https://dokku.com/docs/getting-started/installation/)
+
 ## Fly.io Instructions
 
 1. Clone this repo
