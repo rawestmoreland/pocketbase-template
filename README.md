@@ -14,5 +14,19 @@
 ## Fly.io Instructions
 
 1. Clone this repo
-2. Run `fly launch` in the root of the repo
-3. 
+2. Run `fly launch --build-only` in the root of the repo [Fly CLI instructions here](https://fly.io/docs/hands-on/install-flyctl/)
+3. If you's like to reconfigure defaults - choose 'y' to be taken into the browser.
+4. Run `fly volumes create pb_data --size=1`
+5. In your generated fly.toml add:
+
+```
+[mounts]
+  destination = "/app/pb_data"
+  source = "pb_data"
+```
+
+6. Run `fly deploy --ha=false`
+
+Your Pocketbase will be available at https://<yourapp>.fly.dev/_/
+
+Source: [Flavio Copes](https://flaviocopes.com/run-pocketbase-on-flyio/)
