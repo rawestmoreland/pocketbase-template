@@ -1,16 +1,21 @@
 FROM alpine:latest
 
-ARG PB_VERSION=0.16.4
+# You can change Pocketbase version here
+ARG POCKETBASE_VERSION=0.22.6
 
+# Install the dependencies
 RUN apk add --no-cache \
+    ca-certificates \
     unzip \
-    ca-certificates
+    wget \
+    zip \
+    zlib-dev \
+    bash
 
-# download and unzip PocketBase
-ADD https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip /tmp/pb.zip
-RUN unzip /tmp/pb.zip -d /pb/
+# Download Pocketbase
+ADD https://github.com/pocketbase/pocketbase/releases/download/v${POCKETBASE_VERSION}/pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip /tmp/pocketbase.zip
+RUN unzip /tmp/pocketbase.zip -d /app
+RUN chmod +x /app/pocketbase
 
-EXPOSE 8080
-
-# start PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
+# Start Pocketbase
+CMD [ "/app/pocketbase", "serve", "--http=0.0.0.0:5000", "--dir=/app/pb_data" ]
