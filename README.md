@@ -25,7 +25,7 @@
   source = "pb_data"
 ```
 
-6. Run `fly deploy --ha=false`
+6. Run `fly deploy --ha=false` (the `--ha` flag ensures only one machine is created, the default being 2 machines)
 
 Your Pocketbase will be available at https://<yourapp>.fly.dev/_/
 
