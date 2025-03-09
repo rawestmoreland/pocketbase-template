@@ -23,7 +23,7 @@
 
 ```
 [mounts]
-  destination = "/app/pb_data"
+  destination = "/pb/pb_data"
   source = "pb_data"
 ```
 
