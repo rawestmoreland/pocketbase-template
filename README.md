@@ -17,7 +17,7 @@
 
 1. Clone this repo
 2. Run `fly launch --build-only` in the root of the repo [Fly CLI instructions here](https://fly.io/docs/hands-on/install-flyctl/)
-3. If you's like to reconfigure defaults - choose 'y' to be taken into the browser.
+3. If you'd like to reconfigure defaults - choose 'y' to be taken into the browser.
 4. Run `fly volumes create pb_data --size=1`
 5. In your generated fly.toml add:
 
